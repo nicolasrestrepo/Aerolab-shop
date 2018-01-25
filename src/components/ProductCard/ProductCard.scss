@@ -1,0 +1,34 @@
+.product-card{
+    .card{
+        background: #fff;
+        .buy-icon{
+            display: flex;
+            justify-content: flex-end;
+        }
+        .need-coin{
+            display: flex;
+            justify-content: flex-end;
+            spam{
+                display: flex;
+                border-radius: 20%; 
+                flex-direction: row;
+                background: rgba(0, 0, 0, .3);
+                width: 50%;
+            }
+        }
+        .info{
+            .category{
+                color: lightgrey;
+                font-size: 15px;
+            }
+            .name{
+                color: black;
+                font-size: 20px;
+            }
+        }
+        :hover {
+            background:rgb(23, 219, 255);
+            
+        }
+    }
+}

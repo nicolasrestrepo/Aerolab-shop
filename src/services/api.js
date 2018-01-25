@@ -21,7 +21,7 @@ const api = {
 
     user:{
         async get(){
-            const response = await fetch(`${baseUrl}/user`, {
+            const response = await fetch(`${baseUrl}/user/me`, {
                 method: 'GET',
                 headers: {
                     'Accept': 'application/json',
