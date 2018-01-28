@@ -1,6 +1,12 @@
 .product-card{
     .card{
+        :hover{
+            background: blue;
+        }
         background: #fff;
+        .card-content{
+            padding-top: 10px;
+        }
         .buy-icon{
             display: flex;
             justify-content: flex-end;
@@ -8,12 +14,13 @@
         .need-coin{
             display: flex;
             justify-content: flex-end;
+            z-index: 10;
             spam{
                 display: flex;
                 border-radius: 20%; 
                 flex-direction: row;
                 background: rgba(0, 0, 0, .3);
-                width: 50%;
+                width: 70%;
             }
         }
         .info{
@@ -25,10 +32,6 @@
                 color: black;
                 font-size: 20px;
             }
-        }
-        :hover {
-            background:rgb(23, 219, 255);
-            
         }
     }
 }
