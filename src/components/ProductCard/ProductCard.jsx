@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Col } from 'react-flexbox-grid';
-import coin from '../../assets/icons/coin.svg';
+import Chip from 'material-ui/Chip';
 import { Card } from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 
@@ -19,34 +19,34 @@ class ProductCard extends Component {
 
     }
     render() {
-        const { category, name, cost, userPoints } = this.props;
+        const { category, name, cost } = this.props.product;
+        const { userPoints } = this.props;
 
         const buyIconBlue = (
             <div className="buy-icon">
                 <img src={buyBlue} alt="buy" />
             </div>
         )
+
         const needCoins = (
             <div className="need-coin">
-            
-                <spam>
-                    <p>You need {this.props.cost}</p><img src={coin} />
-                </spam>
+                <Chip className="chip-info">
+                    You need {this.props.product.cost} <img src={coin} alt="coins" /> 
+                </Chip>
             </div>
         )
+
         return (
-            <div className="product-card">
-                <Col m={3} s={3}>
-                    <Card className="card">
+            <Col xs={3}>
+                    <Card className="card" onClick={() => this.props.confirm(this.props.product)}>
                       { userPoints < cost ? needCoins : buyIconBlue }   
-                        <img src={this.props.img.url} alt="product" />
+                        <img className="img-product" src={this.props.product.img.url} alt="product" />
                         <div className="info">
                             <p className="category">{category}</p>
                             <p className="name">{name}</p>
                         </div>
                     </Card>
-                </Col>
-            </div>
+           </Col>
         )
     }
 }

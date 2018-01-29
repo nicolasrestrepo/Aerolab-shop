@@ -2,7 +2,7 @@ import api from '../services/api';
 import fetch from 'isomorphic-fetch';
 import * as types from './actionTypes'
 
-//actions
+//actions load data
 
 function setUser(user){
     return {
@@ -22,6 +22,21 @@ function setHistory(history){
     return{
         type: types.SET_HISTORY,
         payload: history
+    }
+}
+
+
+function filterPrice(price){
+    return{
+        type: types.FILTER_PRICE,
+        payload: price
+    }
+}
+
+function filterCategory(category){
+    return{
+        type: types.FILTER_CATEGORY,
+        payload: category
     }
 }
 

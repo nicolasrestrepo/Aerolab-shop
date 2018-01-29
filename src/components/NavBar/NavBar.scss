@@ -1,4 +1,8 @@
 .nav-bar{
+    position: fixed;
+    width: 100%;
+    background: white;
+    z-index: 20;
     height: 55px;
     padding-right: 25px;
     .logo{
@@ -27,8 +31,9 @@
     }
 }
 .imgHeader{
+
     width: 100%;
     height: 40vh;
-    margin: 0;
+    margin: 55px 0 0 0;
     padding: 0;
 }

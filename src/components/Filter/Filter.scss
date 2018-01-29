@@ -1,0 +1,46 @@
+.filter{
+    margin: 5px auto 5px auto;
+    border-bottom: 1px solid lightgrey; 
+    height: 45px;
+    width: 90%;
+    .filter-category{
+        flex-basis: 35%;
+        max-width: 35%;
+    }
+    .col-xs-1{
+        flex-basis: 12%;
+        max-width: 12%;
+    }
+    .quantity-products{
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        border-right: 1px solid lightgrey;
+        height: 35px;
+        color: #616161;
+    }
+    .sort-by{
+        display: flex;
+        flex-direction: row;
+        height: 35px;
+        align-items: center;
+        .active{
+                background-color: #17dbff !important;
+                span{
+                    color: white !important;
+                }
+        }
+        .desactive{
+            span{
+                color: gray !important;
+            }
+        }
+        .text{
+            color: gray;
+            margin-right: 15px;
+        }
+        .chip-filter{
+            margin-right: 7px !important;
+        }
+    }
+}
