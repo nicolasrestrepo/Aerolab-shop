@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import {bindActionCreators} from 'redux';
 import { Row, Col } from 'react-flexbox-grid';
 import PropTypes from 'prop-types';
-import Dialog from 'material-ui/Dialog';
+import Snackbar from 'material-ui/Snackbar';
 import FlatButton from 'material-ui/FlatButton';
 
 // services
@@ -11,11 +12,10 @@ import api from '../../services/api.js';
 // components
 import ProductCard from '../../components/ProductCard';
 import Filter from '../../components/Filter';
+import ModalConfirm from '../../components/ModalConfirm'; 
 
 import actions from '../../redux/actions';
 
-//assets 
-    import coint from '../../assets/icons/coin.svg';
 //styles
 import './Home.css';
 
@@ -39,7 +39,10 @@ class Home extends Component {
     }
 
     handleClose = () => {
-        this.setState({ open: false });
+        this.setState({ 
+            open: false,
+            currentProduct: {}
+        });
     };
 
     confirmRedeemProduct = (product) => {
@@ -48,43 +51,31 @@ class Home extends Component {
             currentProduct: product,
         })
     }
+
+     redeemProduct = async () => {
+         console.log('this.props', this.props)
+         try{
+             const res = await api.redeem.post(this.state.currentProduct._id)
+             this.setState({open: false})
+            this.props.actions.loadUser();
+         }catch(err){
+
+         }
+       
+        this.setState({
+            open:false
+        })
+    }
     render() {
-        const { price, cost, name, img } = this.state.currentProduct;
-        const actions = [
-            <FlatButton
-                label="Cancel"
-                primary={true}
-                onClick={this.handleClose}
-            />,
-            <FlatButton
-                label="Submit"
-                primary={true}
-                keyboardFocused={true}
-                onClick={this.handleClose}
-            />,
-        ];
+
         return (
             <div>
-                <Dialog
-                    title="confirmation"
-                    modal={false}
-                    actions={actions}
-                    open={this.state.open}
-                    onRequestClose={this.handleClose}
-                >
-                    you want to redeem this product
-                   <Row>
-                        <Col xs={12} className="confirmation">
-                            {img ? <img className="img-info" src={img.url} alt="product" /> : ''}
-                            <div className="info">
-                                <Row>
-                                    <Col xs={12}>{name}</Col>
-                                    <Col xs={12}>{cost}</Col>
-                                </Row>
-                            </div>
-                        </Col>
-                    </Row>
-                </Dialog>
+            <ModalConfirm 
+                handleClose={this.handleClose}
+                redeemProduct={this.redeemProduct}
+                open={this.state.open}
+                {...this.state.currentProduct}
+            />
                 <Filter />
                 <Col xs={10} xsOffset={1}>
                     <Row center="xs">
@@ -107,4 +98,7 @@ const mapStateToProps = (state) => ({
     user: state.user
 })
 
-export default connect(mapStateToProps)(Home);
+const mapDispatchToProps = (dispatch) => ({
+    actions: bindActionCreators(actions, dispatch)
+})
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

@@ -26,10 +26,17 @@ function setHistory(history){
 }
 
 
-function filterPrice(price){
+// filter actions 
+
+function filterLowestPrice(){
     return{
-        type: types.FILTER_PRICE,
-        payload: price
+        type: types.FILTER_LOWEST_PRICE,
+    }
+}
+
+function filterHiguestPrice(){
+    return {
+        type: types.FILTER_HIGHEST_PRICE
     }
 }
 
@@ -71,6 +78,9 @@ export default {
     setUser,
     setProducts,
     setHistory,
+    filterLowestPrice,
+    filterHiguestPrice,
+    filterCategory,
 
     loadUser,
     loadProducts,

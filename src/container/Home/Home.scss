@@ -1,4 +1,11 @@
+.text-confirmation{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+}
 .confirmation{
+    font-size: 16px;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -6,5 +13,9 @@
     .info{
         display: flex;
         flex-direction: column;
+        .coint{
+            display: flex;
+            align-items: center;
+        }
     }
 }

@@ -43,7 +43,7 @@ const api = {
                     'Authorization': `Bearer ${token}`
                 },
             })
-            const data = await response.json()
+            const data = await response.json();
             return data
         }
     },
@@ -56,10 +56,13 @@ const api = {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`
                 },
-                body:{
-                    productId
-                }
+                
+                body:JSON.stringify({
+                    "productId": productId 
+                })
             })
+          const data = await response.json();  
+          return data;
         }
     }
 }
