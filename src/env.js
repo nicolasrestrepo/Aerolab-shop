@@ -1,0 +1,3 @@
+module.exports = {
+    token: process.env.TOKEN || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YTY3ZjA1OTc4OGVmZTAwNTk0YTgyNDIiLCJpYXQiOjE1MTY3NjExNzd9.8c1IU_DcJOPV0pJK84yKtKU6F33ZEmWPlBpJE3a5R9w'
+}

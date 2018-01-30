@@ -1,7 +1,8 @@
 import fetch from 'isomorphic-fetch';
+import env from '../env';
 
 const baseUrl = 'https://aerolab-challenge.now.sh'
-const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YTY3ZjA1OTc4OGVmZTAwNTk0YTgyNDIiLCJpYXQiOjE1MTY3NjExNzd9.8c1IU_DcJOPV0pJK84yKtKU6F33ZEmWPlBpJE3a5R9w'
+
 
 const api = {
     product:{
@@ -11,7 +12,7 @@ const api = {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
+                    'Authorization': `Bearer ${env.token}`
                 },
             })
             const data = await response.json()
@@ -26,7 +27,7 @@ const api = {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
+                    'Authorization': `Bearer ${env.token}`
                 },
             })
             const data = await response.json()
@@ -40,7 +41,7 @@ const api = {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
+                    'Authorization': `Bearer ${env.token}`
                 },
             })
             const data = await response.json();
@@ -54,7 +55,7 @@ const api = {
                 headers: {
                     'Accept': 'application/x-www-form-urlencoded',
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
+                    'Authorization': `Bearer ${env.token}`
                 },
                 
                 body:JSON.stringify({

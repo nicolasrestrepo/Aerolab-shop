@@ -28,25 +28,44 @@ function setHistory(history){
 
 // filter actions 
 
-function filterLowestPrice(){
+function orderPrice(order){
     return{
-        type: types.FILTER_LOWEST_PRICE,
+        type: types.ORDER_PRICE,
+        payload: order
     }
 }
 
-function filterHiguestPrice(){
-    return {
-        type: types.FILTER_HIGHEST_PRICE
-    }
-}
 
-function filterCategory(category){
+function filterCategoryParams(category, allProducts){
     return{
         type: types.FILTER_CATEGORY,
-        payload: category
+        payload:{
+            category,
+            allProducts
+        }
+    }
+}
+function filterCategory(category){
+    return (dispatch, getState) => {
+        const state = getState();
+        const allProducts = state.copyAllProducts;
+        dispatch(filterCategoryParams(category, allProducts))
     }
 }
 
+function setAllRecents(products){
+    return{
+        type: types.RECENTS_PRODUCTS,
+        payload: products
+    }
+}
+function loadAllRecents(){
+    return (dispatch, getState) => {
+        const state = getState();
+        const allProducts = state.copyAllProducts;
+        dispatch(setAllRecents(allProducts))
+    }
+}
 // asynchronous actions
 
 function loadUser() {
@@ -78,8 +97,8 @@ export default {
     setUser,
     setProducts,
     setHistory,
-    filterLowestPrice,
-    filterHiguestPrice,
+    orderPrice,
+    loadAllRecents,
     filterCategory,
 
     loadUser,

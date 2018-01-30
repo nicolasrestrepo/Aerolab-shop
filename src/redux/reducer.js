@@ -7,7 +7,7 @@ import * as types from './actionTypes';
 const initialState = {
     user:{},
     products: [],
-    history: [],
+    copyAllProducts: [],
     categories: []
 }
 
@@ -21,25 +21,30 @@ function userReducer(state = initialState.user, action = {}){
     }
 }
 
+
 function productsReducer(state = initialState.products, action = {}){
     switch(action.type){
         case types.SET_PRODUCTS:
-            return state.concat(action.payload)
-        case types.FILTER_LOWEST_PRICE: 
-            return state.sort((productA, productB) => productA.cost - productB.cost)
-        case types.FILTER_HIGHEST_PRICE:    
-            return state.sort((productA, productB) => productB.cost - productA.cost)
+            return state.concat(action.payload);
+        case types.ORDER_PRICE:    
+            if(action.payload === 'lowest'){
+                return state.map(pro => pro).sort((productA, productB) => productA.cost - productB.cost);
+            } 
+            return state.map(pro => pro).sort((productA, productB) => productB.cost - productA.cost);
+        case types.FILTER_CATEGORY: 
+            return action.payload.allProducts.filter(product => product.category == action.payload.category.value);   
+        case types.RECENTS_PRODUCTS:
+            return action.payload.map(pro => pro);     
         default:     
            return state        
     }
 }
-
-function historyReducer(state = initialState.history, action = {}){
+function copyAllProductsReducer(state = initialState.copyAllProducts, action = {}){
     switch(action.type){
-        case types.SET_HISTORY:
-            return state.concat(action.payload)
-        default:
-            return state;        
+        case types.SET_PRODUCTS:
+        return state.concat(action.payload)
+        default: 
+            return state
     }
 }
 
@@ -57,7 +62,7 @@ function categoriesReducer(state = initialState.categories, action ={}){
 const reducer = combineReducers({
     user: userReducer,
     products: productsReducer,
-    history: historyReducer,
+    copyAllProducts: copyAllProductsReducer,
     categories: categoriesReducer
 })
 

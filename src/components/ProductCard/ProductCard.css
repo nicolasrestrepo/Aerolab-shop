@@ -1,6 +1,51 @@
 .card {
   position: relative;
   height: 265px; }
+  .card .info-hover {
+    background: rgba(23, 219, 255, 0.8);
+    display: none;
+    height: 265px; }
+    .card .info-hover .buy-icon-white {
+      position: absolute;
+      right: 0;
+      padding: 7px; }
+    .card .info-hover .cost {
+      font-size: 30px;
+      color: white; }
+      .card .info-hover .cost img {
+        margin-top: 90px; }
+    .card .info-hover .chip-buy {
+      background-color: white !important;
+      margin-left: 40px !important; }
+      .card .info-hover .chip-buy span {
+        cursor: pointer;
+        margin: auto;
+        display: flex;
+        width: 200px;
+        height: 40px;
+        align-items: center;
+        justify-content: center;
+        color: #424242 !important; }
+  .card :hover > .info-hover {
+    display: block;
+    -webkit-animation: slide-down .3s ease-out;
+    -moz-animation: slide-down .3s ease-out; }
+
+@-webkit-keyframes slide-down {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateY(-10%); }
+  100% {
+    opacity: 1;
+    -webkit-transform: translateY(0); } }
+
+@-moz-keyframes slide-down {
+  0% {
+    opacity: 0;
+    -moz-transform: translateY(-10%); }
+  100% {
+    opacity: 1;
+    -moz-transform: translateY(0); } }
   .card .img-product {
     margin-top: 0;
     position: absolute;
@@ -12,6 +57,8 @@
     display: flex;
     justify-content: flex-end;
     padding: 7px; }
+  .card :hover > .buy-icon {
+    display: none; }
   .card .need-coin {
     display: flex;
     justify-content: flex-end;

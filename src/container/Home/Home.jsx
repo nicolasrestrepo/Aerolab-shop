@@ -53,7 +53,6 @@ class Home extends Component {
     }
 
      redeemProduct = async () => {
-         console.log('this.props', this.props)
          try{
              const res = await api.redeem.post(this.state.currentProduct._id)
              this.setState({open: false})
@@ -67,7 +66,6 @@ class Home extends Component {
         })
     }
     render() {
-
         return (
             <div>
             <ModalConfirm 

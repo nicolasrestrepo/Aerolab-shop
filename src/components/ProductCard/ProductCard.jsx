@@ -39,6 +39,13 @@ class ProductCard extends Component {
         return (
             <Col xs={3}>
                     <Card className="card" onClick={() => this.props.confirm(this.props.product)}>
+                    <div className="info-hover">
+                        <img src={buyWhite} className="buy-icon-white" alt="buy" />
+                            <div className="cost">{cost}<img src={coin} alt="coins" /> </div>
+                            <Chip className="chip-buy">
+                               Redeem now
+                            </Chip>
+                        </div>
                       { userPoints < cost ? needCoins : buyIconBlue }   
                         <img className="img-product" src={this.props.product.img.url} alt="product" />
                         <div className="info">
