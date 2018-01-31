@@ -13,49 +13,63 @@ import coin from '../../assets/icons/coin.svg';
 import './ProductCard.css';
 
 // pendiente crear props types y test
-class ProductCard extends Component {
-    constructor(props) {
-        super(props)
+function ProductCard(props) {
+    const renderItem = () => {
+        let item = {};
+        if (props.origin === "home") {
+            if (props.userPoints < props.product.cost) {
+                return (
+                    <div className="need-coin">
+                        <Chip className="chip-info">
+                            You need {props.product.cost} <img src={coin} alt="coins" />
+                        </Chip>
+                    </div>
+                )
+            } else {
+                return (
+                    <div className="buy-icon">
+                        <img src={buyBlue} alt="buy" />
+                    </div>
+                )
+            }
+        } else {
+            return (
+                <div className="need-coin">
+                    <Chip className="chip-info">
+                        Cost {props.product.cost} <img src={coin} alt="coins" />
+                    </Chip>
+                </div>
+            )
+        }
 
     }
-    render() {
-        const { category, name, cost } = this.props.product;
-        const { userPoints } = this.props;
 
-        const buyIconBlue = (
-            <div className="buy-icon">
-                <img src={buyBlue} alt="buy" />
-            </div>
-        )
-
-        const needCoins = (
-            <div className="need-coin">
-                <Chip className="chip-info">
-                    You need {this.props.product.cost} <img src={coin} alt="coins" /> 
-                </Chip>
-            </div>
-        )
-
-        return (
-            <Col xs={3}>
-                    <Card className="card" onClick={() => this.props.confirm(this.props.product)}>
-                    <div className="info-hover">
-                        <img src={buyWhite} className="buy-icon-white" alt="buy" />
-                            <div className="cost">{cost}<img src={coin} alt="coins" /> </div>
-                            <Chip className="chip-buy">
-                               Redeem now
-                            </Chip>
-                        </div>
-                      { userPoints < cost ? needCoins : buyIconBlue }   
-                        <img className="img-product" src={this.props.product.img.url} alt="product" />
-                        <div className="info">
-                            <p className="category">{category}</p>
-                            <p className="name">{name}</p>
-                        </div>
-                    </Card>
-           </Col>
-        )
+    const renderInfoBuy = () => {
+        if (props.origin === "home" && props.userPoints > props.product.cost) {
+            return (
+                <div className="info-hover">
+                    <img src={buyWhite} className="buy-icon-white" alt="buy" />
+                    <div className="cost">{props.product.cost}<img src={coin} alt="coins" /> </div>
+                    <Chip className="chip-buy" onClick={() => props.confirm(props.product)}>
+                        Redeem now
+                    </Chip>
+                </div>
+            )
+        }
     }
+    return (
+        <Col xs={3}>
+            <Card className="card">
+                {renderInfoBuy()}
+                {renderItem()}
+                <img className="img-product" src={props.product.img.url} alt="product" />
+                <div className="info">
+                    <p className="category">{props.product.category}</p>
+                    <p className="name">{props.product.name}</p>
+                </div>
+            </Card>
+        </Col>
+    )
 }
 
 export default ProductCard;

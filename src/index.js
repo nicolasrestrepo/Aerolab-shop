@@ -4,12 +4,15 @@ import AppRoutes from './routes';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import registerServiceWorker from './registerServiceWorker';
+import createBrowserHistory from 'history/createBrowserHistory'
 
 import store from './redux/store';
 
+const customHistory = createBrowserHistory()
+
 ReactDOM.render(
     <Provider store={store}>
-        <Router>
+        <Router history={customHistory}>
             <AppRoutes />
         </Router>
     </Provider>

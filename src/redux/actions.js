@@ -18,13 +18,19 @@ function setProducts(products){
     }
 }
 
-function setHistory(history){
+function setCopyHistory(history){
     return{
-        type: types.SET_HISTORY,
+        type: types.SET_COPY_HISTORY,
         payload: history
     }
 }
 
+function setCurrentLocation(location){
+    return{
+        type: types.SET_CURRENT_LOCATION,
+        payload: location
+    }
+}
 
 // filter actions 
 
@@ -36,42 +42,79 @@ function orderPrice(order){
 }
 
 
-function filterCategoryParams(category, allProducts){
+function filterCategoryHomeParams(category, allProducts){
     return{
-        type: types.FILTER_CATEGORY,
+        type: types.FILTER_CATEGORY_HOME,
         payload:{
             category,
             allProducts
         }
     }
 }
-function filterCategory(category){
+function filterCategoryHome(category){
     return (dispatch, getState) => {
         const state = getState();
         const allProducts = state.copyAllProducts;
-        dispatch(filterCategoryParams(category, allProducts))
+        dispatch(filterCategoryHomeParams(category, allProducts))
     }
 }
 
-function setAllRecents(products){
+function filterCategoryHistoryParams(category, allProducts){
+    return{
+        type: types.FILTER_CATEGORY_HISTORY,
+        payload:{
+            category,
+            allProducts
+        }
+    }
+}
+
+function filterCategoryHistory(category){
+    return (dispatch, getState) => {
+        const state = getState();
+        const history = state.user.redeemHistory;
+        dispatch(filterCategoryHistoryParams(category, history))
+    }
+}
+
+
+function setAllRecentsHome(products){
     return{
         type: types.RECENTS_PRODUCTS,
         payload: products
     }
 }
-function loadAllRecents(){
+function loadAllRecentsHome(){
     return (dispatch, getState) => {
         const state = getState();
         const allProducts = state.copyAllProducts;
-        dispatch(setAllRecents(allProducts))
+        dispatch(setAllRecentsHome(allProducts))
     }
 }
+
+function setAllProductsHistory(products){
+    return{
+        type: types.SET_ALL_PRODUCTS_HISTORY,
+        payload: products
+    }
+}
+function loadAllProductsHistory(){
+    return (dispatch, getState) => {
+        const state = getState();
+        const allProducts = state.user.redeemHistory;
+        dispatch(setAllProductsHistory(allProducts))
+    }
+}
+
+
+
 // asynchronous actions
 
 function loadUser() {
     return async (dispatch) => {
         const user = await api.user.get();
         dispatch(setUser(user));
+        dispatch(setCopyHistory(user.redeemHistory))
         return user;
     }
 }
@@ -84,25 +127,18 @@ function loadProducts(){
     }
 }
 
-function loadHistory(){
-    return async (dispatch) => {
-        const history = await api.history.get();
-        dispatch(setHistory(history));
-        return history;
-    }
-}
-
 
 export default {
     setUser,
     setProducts,
-    setHistory,
+    setCopyHistory,
     orderPrice,
-    loadAllRecents,
-    filterCategory,
-
+    loadAllRecentsHome,
+    loadAllProductsHistory,
+    filterCategoryHome,
+    filterCategoryHistory,
+    setCurrentLocation,
     loadUser,
-    loadProducts,
-    loadHistory
+    loadProducts
 }
 

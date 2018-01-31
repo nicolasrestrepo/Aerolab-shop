@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import {bindActionCreators} from 'redux';
 import { Row, Col } from 'react-flexbox-grid';
 import PropTypes from 'prop-types';
-import Snackbar from 'material-ui/Snackbar';
 import FlatButton from 'material-ui/FlatButton';
+
 
 // services
 import api from '../../services/api.js';
@@ -13,6 +13,7 @@ import api from '../../services/api.js';
 import ProductCard from '../../components/ProductCard';
 import Filter from '../../components/Filter';
 import ModalConfirm from '../../components/ModalConfirm'; 
+import Footer from '../../components/Footer';
 
 import actions from '../../redux/actions';
 
@@ -30,6 +31,13 @@ class Home extends Component {
         }
     }
 
+    componentDidMount(){
+        this.props.actions.setCurrentLocation(this.props.location.pathname)
+        this.setState({
+            products: this.props.products,
+            userPoints: this.props.user.points
+        })
+    }
 
     componentWillReceiveProps(nextProps) {
         this.setState({
@@ -79,6 +87,7 @@ class Home extends Component {
                     <Row center="xs">
                         {this.state.products.map(product =>
                             <ProductCard
+                                origin="home"
                                 confirm={this.confirmRedeemProduct}
                                 key={product._id}
                                 userPoints={this.state.userPoints}
@@ -86,6 +95,7 @@ class Home extends Component {
                         )}
                     </Row>
                 </Col>
+               <Footer /> 
             </div>
         );
     }

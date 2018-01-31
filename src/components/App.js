@@ -25,14 +25,13 @@ class App extends Component {
     }
 
     componentWillReceiveProps(nextProps){
-        console.log('nextProps in App', nextProps);
         if(this.state.user !== nextProps.user){
             this.setState({
                 user: nextProps.user
             })
         }
     }
-    render() {
+    render() { 
         return (
             <MuiThemeProvider>
                 <NavBar user={this.state.user}/>

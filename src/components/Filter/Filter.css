@@ -9,6 +9,9 @@
   .filter .col-xs-1 {
     flex-basis: 12%;
     max-width: 12%; }
+  .filter .col-xs-1.btn-pagination-filter {
+    flex-basis: 7%;
+    max-width: 7%; }
   .filter .quantity-products {
     display: flex;
     justify-content: flex-end;

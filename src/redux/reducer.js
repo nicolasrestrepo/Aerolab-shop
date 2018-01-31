@@ -6,9 +6,11 @@ import * as types from './actionTypes';
 
 const initialState = {
     user:{},
+    copyHistory: [],
     products: [],
     copyAllProducts: [],
-    categories: []
+    categories: [],
+    currentLocation: ''
 }
 
 
@@ -31,8 +33,8 @@ function productsReducer(state = initialState.products, action = {}){
                 return state.map(pro => pro).sort((productA, productB) => productA.cost - productB.cost);
             } 
             return state.map(pro => pro).sort((productA, productB) => productB.cost - productA.cost);
-        case types.FILTER_CATEGORY: 
-            return action.payload.allProducts.filter(product => product.category == action.payload.category.value);   
+        case types.FILTER_CATEGORY_HOME: 
+            return action.payload.allProducts.filter(product => product.category == action.payload.category);   
         case types.RECENTS_PRODUCTS:
             return action.payload.map(pro => pro);     
         default:     
@@ -48,6 +50,20 @@ function copyAllProductsReducer(state = initialState.copyAllProducts, action = {
     }
 }
 
+function copyHistoryReducer(state = initialState.copyHistory, action = {}){
+    console.log('action.type in reducer copyHistory', action.payload)
+    switch(action.type){
+        case types.SET_COPY_HISTORY:
+            return action.payload.map(pro => pro)
+        case  types.FILTER_CATEGORY_HISTORY:
+            return action.payload.allProducts.filter(product => product.category == action.payload.category);  
+        case types.SET_ALL_PRODUCTS_HISTORY:
+            return action.payload.map(pro => pro);  
+        default: 
+            return state    
+    }
+}
+
 function categoriesReducer(state = initialState.categories, action ={}){
     switch(action.type){
         case types.SET_PRODUCTS:
@@ -58,10 +74,20 @@ function categoriesReducer(state = initialState.categories, action ={}){
     }
 }
 
+function currentLocationReducer(state = initialState.currentLocation, action = {}){
+    switch(action.type){
+        case types.SET_CURRENT_LOCATION: 
+            return action.payload
+        default: 
+            return state;    
+    }
+}
 
 const reducer = combineReducers({
     user: userReducer,
     products: productsReducer,
+    currentLocation: currentLocationReducer,
+    copyHistory: copyHistoryReducer,
     copyAllProducts: copyAllProductsReducer,
     categories: categoriesReducer
 })

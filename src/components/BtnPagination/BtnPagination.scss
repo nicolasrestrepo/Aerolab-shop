@@ -1,0 +1,11 @@
+.btnPagination{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    img{
+        width: 35px;
+        margin-left: 15px;
+    }
+}

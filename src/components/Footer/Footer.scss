@@ -1,0 +1,18 @@
+.footer{
+    margin: 5px auto 10px auto;
+    border-bottom: 1px solid lightgrey; 
+    height: 45px;
+    width: 90%;
+    .quantity-products{
+        .text-products{
+           color:  #616161;
+        }
+    }
+    .btn-pagination-footer{
+        display: flex;
+        padding-right: 50px;
+        flex-direction: row;
+        justify-content: flex-end;
+        align-items: flex-end;
+    }
+}
