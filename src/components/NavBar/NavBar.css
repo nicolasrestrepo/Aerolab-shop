@@ -17,10 +17,11 @@
     display: flex;
     justify-content: center;
     align-items: center; }
-    .nav-bar .menu span {
-      font-size: 50px !important;
-      color: #616161 !important;
-      cursor: pointer; }
+    .nav-bar .menu div img {
+      margin-top: 5px;
+      width: 40px;
+      cursor: pointer;
+      fill: white; }
   .nav-bar .logo img {
     margin: 7px 0 0 10px; }
   .nav-bar .info {

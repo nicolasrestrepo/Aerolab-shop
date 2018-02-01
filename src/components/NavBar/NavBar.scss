@@ -18,11 +18,15 @@
         display: flex;
         justify-content: center;
         align-items: center; 
-        span{
-            font-size: 50px !important;
-            color: #616161 !important;
-            cursor: pointer;
+        div{
+            img{
+                margin-top: 5px; 
+                width: 40px;
+                cursor: pointer;
+                fill: white;
+            }
         }
+
     }
     .logo{
         img{

@@ -1,17 +1,12 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Row, Col } from 'react-flexbox-grid';
-import PropTypes from 'prop-types';
 
-
-// services
-import api from '../../services/api.js';
 
 // components
 import ProductCard from '../../components/ProductCard';
-
-import Footer from '../../components/Footer';
 
 import actions from '../../redux/actions';
 
@@ -62,10 +57,23 @@ class History extends Component {
                         {this.state.products.length > 0 ? renderProducts : noProducts}
                     </Row>
                 </Col>
-                <Footer />
             </div>
         );
     }
+}
+
+History.defaultProps = {
+    products: [],
+    location: {
+        pathname: "/history"
+    }
+}
+
+History.propTypes = {
+    location: PropTypes.shape({
+        pathname: PropTypes.string
+    }),
+    products: PropTypes.array
 }
 
 const mapStateToProps = (state) => ({

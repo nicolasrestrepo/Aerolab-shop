@@ -1,8 +1,9 @@
-import React, { Component } from 'react'
+import React from 'react';
+import PropTypes from 'prop-types';
 import { Col } from 'react-flexbox-grid';
 import Chip from 'material-ui/Chip';
 import { Card } from 'material-ui/Card';
-import FlatButton from 'material-ui/FlatButton';
+
 
 //assets
 import buyWhite from '../../assets/icons/buy-white.svg';
@@ -15,7 +16,6 @@ import './ProductCard.css';
 // pendiente crear props types y test
 function ProductCard(props) {
     const renderItem = () => {
-        let item = {};
         if (props.origin === "home") {
             if (props.userPoints < props.product.cost) {
                 return (
@@ -62,7 +62,9 @@ function ProductCard(props) {
             <Card className="card">
                 {renderInfoBuy()}
                 {renderItem()}
-                <img className="img-product" src={props.product.img.url} alt="product" />
+                {props.product.img && (
+                    <img className="img-product" src={props.product.img.url} alt="product" />)
+                }
                 <div className="info">
                     <p className="category">{props.product.category}</p>
                     <p className="name">{props.product.name}</p>
@@ -70,6 +72,19 @@ function ProductCard(props) {
             </Card>
         </Col>
     )
+}
+
+ProductCard.defaultProps = {
+    origin: "home",
+    userPoints: 5000,
+    product: {},
+}
+
+ProductCard.propTypes = {
+    origin: PropTypes.string,
+    userPoints: PropTypes.number,
+    product: PropTypes.object,
+
 }
 
 export default ProductCard;

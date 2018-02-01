@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Row, Col } from 'react-flexbox-grid';
 import {connect} from 'react-redux';
@@ -11,6 +12,7 @@ import MenuItem from 'material-ui/MenuItem';
 import logoAerolab from '../../assets/aerolab-logo.svg';
 import headerImg from '../../assets/header-x1.png'
 import coin from '../../assets/icons/coin.svg';
+import hamburger from '../../assets/icons/if_menu-alt_134216.svg'
 
 import actions from '../../redux/actions'
 //styles
@@ -58,9 +60,7 @@ class NavBar extends Component {
                     <Row>
 
                         <Col xs={1} className="menu">
-                            <FontIcon
-                                onClick={this.handleToggle}
-                                className="material-icons">menu</FontIcon>
+                            <div onClick={this.handleToggle}><img src={hamburger} alt="hamburger"/></div>
                         </Col>
 
                         <Col xs={7} className="logo">
@@ -110,7 +110,33 @@ class NavBar extends Component {
 
 }
 
-const mapStateToProps = (state) => ({
+NavBar.defaultProps = {
+    actions: {
+        filterCategoryHome: () => {},
+        filterCategoryHistory: () => {},
+        loadAllRecentsHome: () => {},
+        loadAllProductsHistory: () => {},
+    },
+    currentLocation: "/",
+    user: {},
+    categories: []
+}
+
+NavBar.propTypes = {
+    actions: PropTypes.shape({
+        filterCategoryHome: PropTypes.func,
+        filterCategoryHistory: PropTypes.func,
+        loadAllRecentsHome: PropTypes.func,
+        loadAllProductsHistory: PropTypes.func
+    }),
+    currentLocation: PropTypes.string,
+    user: PropTypes.object,
+    categories: PropTypes.array
+}
+
+
+
+const mapStateToProps = (state) => ({ 
     categories: state.categories,
     currentLocation: state.currentLocation
 })

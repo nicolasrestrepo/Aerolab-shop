@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Row, Col } from 'react-flexbox-grid';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Chip from 'material-ui/Chip';
-import SelectField from 'material-ui/SelectField';
-import MenuItem from 'material-ui/MenuItem';
 import BtnPagination from '../BtnPagination';
 import actions from '../../redux/actions'
 
@@ -15,35 +14,29 @@ class Filter extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            value: 5,
-            categories: [],
             activeFilter: 'recent'
         }
     }
 
-    componentWillReceiveProps(nextProps) {
-        this.setState({
-            categories: nextProps.categories
-        })
-    }
     changeActive = (active) => {
         this.setState({
             activeFilter: active
         })
     }
     //accion for get recents products from copy products 
-    recents = () => this.props.actions.loadAllRecents()
+    recents = () => this.props.actions.loadAllRecentsHome()
 
 
     orderPrice = (order) => this.props.actions.orderPrice(order)
 
     render() {
-        const { value, categories, activeFilter } = this.state;
+        const {  activeFilter } = this.state;
+
         return (
             <Col xs={10} xsOffset={1} className="filter">
                 <Row>
                     <Col xs={1} className="quantity-products">
-                        16 of 32 products
+                        {this.props.cuantityProducts} of 32 products
                 </Col>
                     <Col xs={5} className="sort-by">
                         <div className="text">Sort by: </div>
@@ -69,8 +62,25 @@ class Filter extends Component {
 
 }
 
+Filter.defaultProps = {
+    actions: {
+        loadAllRecentsHome: () => {},
+        orderPrice: () => {}
+    },
+    categories: []
+}
+
+Filter.propTypes = {
+    actions: PropTypes.shape({
+        loadAllRecentsHome: PropTypes.func,
+        orderPrice: PropTypes.func
+    }),
+    categories: PropTypes.array
+}
+
 const mapStateToProps = (state) => ({
-    categories: state.categories
+    categories: state.categories,
+    cuantityProducts: state.cuantityProductsRender
 })
 
 const mapDispatchToProps = (dispatch) => ({

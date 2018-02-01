@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Dialog from 'material-ui/Dialog';
 import coint from '../../assets/icons/coin.svg';
 import { Row, Col } from 'react-flexbox-grid';
@@ -35,7 +36,7 @@ function ModalConfirm(props){
                 <div className="info">
                     <Row>
                         <Col xs={12}>{props.name}</Col>
-                        <Col className="coint" xs={12}><img src={coint} /> {props.cost}</Col>
+                        <Col className="coint" xs={12}><img src={coint} alt="coint" /> {props.cost}</Col>
                     </Row>
                 </div>
             </Col>
@@ -43,6 +44,25 @@ function ModalConfirm(props){
     </Dialog>
 )
 }
+
+ModalConfirm.defaultProps = {
+    handleClose: () => {},
+    redeemProduct: () => {},
+    img: {
+        url: 'default url'
+    }, 
+    cost: 3000
+}
+
+ModalConfirm.propTypes = {
+    handleClose: PropTypes.func,
+    redeemProduct: PropTypes.func,
+    img: PropTypes.shape({
+        url: PropTypes.string
+    }),
+    cost: PropTypes.number
+}
+
 
 
 export default ModalConfirm;

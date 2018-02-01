@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {bindActionCreators} from 'redux';
 import { Row, Col } from 'react-flexbox-grid';
-import PropTypes from 'prop-types';
-import FlatButton from 'material-ui/FlatButton';
+
 
 
 // services
@@ -101,9 +101,31 @@ class Home extends Component {
     }
 }
 
+Home.defaultProps = {
+    actions: {
+        setCurrentLocation: () => {},
+    },
+    location: {
+        pathname: "/"
+    },
+    products: [],
+    user: {}
+}
+
+Home.propTypes = {
+    actions: PropTypes.shape({
+        setCurrentLocation: PropTypes.func,
+    }),
+    location: PropTypes.shape({
+        pathname: PropTypes.string
+    }),
+    products: PropTypes.array,
+    user: PropTypes.object
+}
+
 const mapStateToProps = (state) => ({
     products: state.products,
-    user: state.user
+    user: state.user,
 })
 
 const mapDispatchToProps = (dispatch) => ({
